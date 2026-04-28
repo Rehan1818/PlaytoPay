@@ -5,5 +5,5 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("payouts.urls")),
-    re_path(r"^(?!api/|admin/).*$", TemplateView.as_view(template_name="index.html")),
+    re_path(r"^(?!api/|admin/|assets/).*$", TemplateView.as_view(template_name="index.html")),
 ]
