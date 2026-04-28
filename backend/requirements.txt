@@ -4,3 +4,5 @@ psycopg[binary]>=3.2
 redis>=5.0
 huey>=2.5
 django-cors-headers>=4.4
+gunicorn>=22.0
+whitenoise>=6.7
