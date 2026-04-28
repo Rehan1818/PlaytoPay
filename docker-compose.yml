@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: playtopay-postgres
+    environment:
+      POSTGRES_DB: playtopay
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - playtopay_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: playtopay-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - playtopay_redis_data:/data
+
+volumes:
+  playtopay_postgres_data:
+  playtopay_redis_data:
