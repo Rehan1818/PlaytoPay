@@ -7,7 +7,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-only-secret-key")
 DEBUG = os.getenv("DJANGO_DEBUG", "0") == "1"
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
+
+def _normalize_host(host: str) -> str:
+    host = host.strip()
+    host = host.replace("https://", "").replace("http://", "")
+    host = host.split("/")[0].split(":")[0]
+    return host
+
+
+_allowed_hosts_env = os.getenv("DJANGO_ALLOWED_HOSTS", ".onrender.com,localhost,127.0.0.1")
+ALLOWED_HOSTS = [_normalize_host(h) for h in _allowed_hosts_env.split(",") if _normalize_host(h)]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
